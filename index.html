@@ -1,263 +1,333 @@
-import React, { useState } from "react";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Antropología Simbólica</title>
 
-const App = () => {
-  const [selectedAnthropologist, setSelectedAnthropologist] = useState(null);
-
-  const anthropologists = [
-    {
-      id: 1,
-      name: "Clifford Geertz",
-      lifespan: "1926–2006",
-      contribution: "Padre de la antropología simbólica moderna. Propuso que la cultura es una red de significados que los seres humanos tejen y en la que están inmersos.",
-      method: "Descripción densa (thick description)",
-      keyWorks: ["La interpretación de las culturas (1973)", "Negara: El estado-teatro en el Bali del siglo XIX"],
-      quote: "El hombre es un animal suspendido en redes de significado que él mismo ha tejido"
-    },
-    {
-      id: 2,
-      name: "Victor Turner",
-      lifespan: "1920–1983",
-      contribution: "Estudió los rituales como sistemas simbólicos que resuelven conflictos sociales y facilitan transiciones.",
-      concepts: ["Liminalidad", "Communitas"],
-      keyWorks: ["El proceso ritual (1969)", "Dramas, campos y metáforas"],
-      example: "Su trabajo con los rituales de los Ndembu mostró cómo los símbolos median en disputas y restauran el orden social."
-    },
-    {
-      id: 3,
-      name: "Mary Douglas",
-      lifespan: "1921–2007",
-      contribution: "Analizó cómo los símbolos organizan el pensamiento y las prácticas sociales, especialmente en torno a la pureza, el peligro y el cuerpo.",
-      keyWorks: ["Pureza y peligro (1966)", "Símbolos naturales"],
-      insight: "Mostró que incluso lo aparentemente 'natural' está culturalmente construido."
-    },
-    {
-      id: 4,
-      name: "Pierre Bourdieu",
-      lifespan: "1930–2002",
-      contribution: "Teoría del capital simbólico y la distinción cultural para entender cómo los símbolos reproducen desigualdades sociales.",
-      concepts: ["Habitus", "Capital simbólico"],
-      keyWorks: ["La distinción (1979)", "El sentido práctico"],
-      insight: "Los símbolos se internalizan como 'sentido común'"
-    },
-    {
-      id: 5,
-      name: "Sherry Ortner",
-      lifespan: "n/a",
-      contribution: "Voz crítica que propone que los símbolos no solo reflejan la realidad, sino que también la transforman.",
-      keyWorks: ["Sherpas a través del tiempo", "Teoría de la práctica"],
-      quote: "Los símbolos no son solo espejos de la sociedad, sino herramientas para cambiarla"
-    },
-    {
-      id: 6,
-      name: "David Schneider",
-      lifespan: "1918–1995",
-      contribution: "Estudió cómo los símbolos de parentesco organizan las relaciones sociales y jerarquías.",
-      keyWorks: ["American Kinship: A Cultural Account"],
-      insight: "Cómo los símbolos de parentesco reflejan valores individuales vs. colectivos"
-    },
-    {
-      id: 7,
-      name: "Marshall Sahlins",
-      lifespan: "n/a",
-      contribution: "Combinó antropología simbólica con materialismo cultural, mostrando cómo los símbolos interactúan con condiciones materiales.",
-      keyWorks: ["Islas de historia"],
-      notable: "Debate clásico sobre la muerte del capitán Cook"
-    },
-    {
-      id: 8,
-      name: "Alfred Gell",
-      lifespan: "1945–1997",
-      contribution: "Estudió el arte como sistema simbólico y su agencia en las relaciones sociales.",
-      keyWorks: ["Art and Agency"],
-      theory: "Las obras de arte son 'agentes' que actúan en la sociedad"
-    },
-    {
-      id: 9,
-      name: "Nancy Munn",
-      lifespan: "n/a",
-      contribution: "Analizó cómo los símbolos espaciales y temporales organizan la experiencia humana en culturas no occidentales.",
-      keyWorks: ["The Fame of Gawa"],
-      focus: "Símbolos de prestigio en sociedades melanesias"
-    },
-    {
-      id: 10,
-      name: "Tom Boellstorff",
-      lifespan: "n/a",
-      contribution: "Aplicó la antropología simbólica a culturas digitales, estudiando cómo los símbolos construyen identidades en línea.",
-      keyWorks: ["Coming of Age in Second Life"],
-      focus: "Avatares, emojis y vida virtual como espacio simbólico"
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4f46e5',
+            secondary: '#ec4899',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
-  ];
+    .backdrop-blur-sm {
+      backdrop-filter: blur(4px);
+    }
+    .backdrop-blur-md {
+      backdrop-filter: blur(12px);
+    }
+    .backdrop-blur-lg {
+      backdrop-filter: blur(24px);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
 
-  const openModal = (anthropologist) => {
-    setSelectedAnthropologist(anthropologist);
-  };
+  <!-- Header -->
+  <header class="bg-black/20 backdrop-blur-sm border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-8 text-center">
+      <h1 class="text-5xl font-bold text-white mb-4 tracking-tight animate-fade-in">
+        Antropología Simbólica
+      </h1>
+      <p class="text-xl text-purple-200 max-w-3xl mx-auto leading-relaxed animate-fade-in" style="animation-delay: 0.2s">
+        Explorando las redes de significado que tejen las culturas humanas a través de los grandes pensadores del campo
+      </p>
+    </div>
+  </header>
 
-  const closeModal = () => {
-    setSelectedAnthropologist(null);
-  };
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-6 py-12">
+    <div id="anthropologists-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Cards will be inserted here by JS -->
+    </div>
+  </main>
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Header */}
-      <header className="bg-black/20 backdrop-blur-sm border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <h1 className="text-5xl font-bold text-center text-white mb-4 tracking-tight">
-            Antropología Simbólica
-          </h1>
-          <p className="text-xl text-center text-purple-200 max-w-3xl mx-auto leading-relaxed">
-            Explorando las redes de significado que tejen las culturas humanas a través de los grandes pensadores del campo
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white/15 backdrop-blur-lg rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-white/20 shadow-2xl">
+      <div class="p-8 relative">
+        <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl font-bold transition-colors duration-200">&times;</button>
+        
+        <div id="modal-content" class="pt-6">
+          <!-- Dynamic content goes here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-black/20 backdrop-blur-sm border-t border-white/10 mt-20">
+    <div class="max-w-7xl mx-auto px-6 py-8 text-center">
+      <p class="text-purple-200">
+        Una exploración visual de los grandes pensadores de la antropología simbólica
+      </p>
+      <p class="text-purple-300/70 text-sm mt-2">
+        Clifford Geertz · Victor Turner · Mary Douglas · Pierre Bourdieu · Sherry Ortner · David Schneider · Marshall Sahlins · Alfred Gell · Nancy Munn · Tom Boellstorff
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Data
+    const anthropologists = [
+      {
+        id: 1,
+        name: "Clifford Geertz",
+        lifespan: "1926–2006",
+        contribution: "Padre de la antropología simbólica moderna. Propuso que la cultura es una red de significados que los seres humanos tejen y en la que están inmersos.",
+        method: "Descripción densa (thick description)",
+        keyWorks: ["La interpretación de las culturas (1973)", "Negara: El estado-teatro en el Bali del siglo XIX"],
+        quote: "El hombre es un animal suspendido en redes de significado que él mismo ha tejido"
+      },
+      {
+        id: 2,
+        name: "Victor Turner",
+        lifespan: "1920–1983",
+        contribution: "Estudió los rituales como sistemas simbólicos que resuelven conflictos sociales y facilitan transiciones.",
+        concepts: ["Liminalidad", "Communitas"],
+        keyWorks: ["El proceso ritual (1969)", "Dramas, campos y metáforas"],
+        example: "Su trabajo con los rituales de los Ndembu mostró cómo los símbolos median en disputas y restauran el orden social."
+      },
+      {
+        id: 3,
+        name: "Mary Douglas",
+        lifespan: "1921–2007",
+        contribution: "Analizó cómo los símbolos organizan el pensamiento y las prácticas sociales, especialmente en torno a la pureza, el peligro y el cuerpo.",
+        keyWorks: ["Pureza y peligro (1966)", "Símbolos naturales"],
+        insight: "Mostró que incluso lo aparentemente 'natural' está culturalmente construido."
+      },
+      {
+        id: 4,
+        name: "Pierre Bourdieu",
+        lifespan: "1930–2002",
+        contribution: "Teoría del capital simbólico y la distinción cultural para entender cómo los símbolos reproducen desigualdades sociales.",
+        concepts: ["Habitus", "Capital simbólico"],
+        keyWorks: ["La distinción (1979)", "El sentido práctico"],
+        insight: "Los símbolos se internalizan como 'sentido común'"
+      },
+      {
+        id: 5,
+        name: "Sherry Ortner",
+        lifespan: "n/a",
+        contribution: "Voz crítica que propone que los símbolos no solo reflejan la realidad, sino que también la transforman.",
+        keyWorks: ["Sherpas a través del tiempo", "Teoría de la práctica"],
+        quote: "Los símbolos no son solo espejos de la sociedad, sino herramientas para cambiarla"
+      },
+      {
+        id: 6,
+        name: "David Schneider",
+        lifespan: "1918–1995",
+        contribution: "Estudió cómo los símbolos de parentesco organizan las relaciones sociales y jerarquías.",
+        keyWorks: ["American Kinship: A Cultural Account"],
+        insight: "Cómo los símbolos de parentesco reflejan valores individuales vs. colectivos"
+      },
+      {
+        id: 7,
+        name: "Marshall Sahlins",
+        lifespan: "n/a",
+        contribution: "Combinó antropología simbólica con materialismo cultural, mostrando cómo los símbolos interactúan con condiciones materiales.",
+        keyWorks: ["Islas de historia"],
+        notable: "Debate clásico sobre la muerte del capitán Cook"
+      },
+      {
+        id: 8,
+        name: "Alfred Gell",
+        lifespan: "1945–1997",
+        contribution: "Estudió el arte como sistema simbólico y su agencia en las relaciones sociales.",
+        keyWorks: ["Art and Agency"],
+        theory: "Las obras de arte son 'agentes' que actúan en la sociedad"
+      },
+      {
+        id: 9,
+        name: "Nancy Munn",
+        lifespan: "n/a",
+        contribution: "Analizó cómo los símbolos espaciales y temporales organizan la experiencia humana en culturas no occidentales.",
+        keyWorks: ["The Fame of Gawa"],
+        focus: "Símbolos de prestigio en sociedades melanesias"
+      },
+      {
+        id: 10,
+        name: "Tom Boellstorff",
+        lifespan: "n/a",
+        contribution: "Aplicó la antropología simbólica a culturas digitales, estudiando cómo los símbolos construyen identidades en línea.",
+        keyWorks: ["Coming of Age in Second Life"],
+        focus: "Avatares, emojis y vida virtual como espacio simbólico"
+      }
+    ];
+
+    // Render Cards
+    function renderAnthropologists() {
+      const container = document.getElementById('anthropologists-grid');
+      container.innerHTML = '';
+
+      anthropologists.forEach(a => {
+        const card = document.createElement('div');
+        card.className = 'bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-2xl animate-fade-in';
+        card.style.animationDelay = `${0.1 * a.id}s`;
+        card.onclick = () => openModal(a);
+
+        let conceptsHtml = '';
+        if (a.concepts) {
+          conceptsHtml = a.concepts.map(c => `<span class="px-3 py-1 bg-purple-500/30 text-purple-100 text-xs rounded-full border border-purple-400/50">${c}</span>`).join('');
+        }
+
+        card.innerHTML = `
+          <div class="text-center mb-4">
+            <div class="w-20 h-20 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-bold text-white shadow-lg">
+              ${a.name.charAt(0)}
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-1">${a.name}</h3>
+            <p class="text-purple-200 text-sm">${a.lifespan}</p>
+          </div>
+          
+          <p class="text-gray-200 text-sm leading-relaxed mb-4 line-clamp-3">
+            ${a.contribution}
           </p>
-        </div>
-      </header>
+          
+          <div class="flex flex-wrap gap-2 mt-4">
+            ${conceptsHtml}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {anthropologists.map((anthropologist) => (
-            <div
-              key={anthropologist.id}
-              className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-2xl"
-              onClick={() => openModal(anthropologist)}
-            >
-              <div className="text-center mb-4">
-                <div className="w-20 h-20 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-bold text-white shadow-lg">
-                  {anthropologist.name.charAt(0)}
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-1">{anthropologist.name}</h3>
-                <p className="text-purple-200 text-sm">{anthropologist.lifespan}</p>
-              </div>
-              
-              <p className="text-gray-200 text-sm leading-relaxed mb-4 line-clamp-3">
-                {anthropologist.contribution}
-              </p>
-              
-              <div className="flex flex-wrap gap-2 mt-4">
-                {anthropologist.concepts?.map((concept, index) => (
-                  <span 
-                    key={index} 
-                    className="px-3 py-1 bg-purple-500/30 text-purple-100 text-xs rounded-full border border-purple-400/50"
-                  >
-                    {concept}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </main>
-
-      {/* Modal */}
-      {selectedAnthropologist && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white/15 backdrop-blur-lg rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-white/20 shadow-2xl">
-            <div className="p-8">
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <h2 className="text-3xl font-bold text-white mb-2">{selectedAnthropologist.name}</h2>
-                  <p className="text-purple-200">{selectedAnthropologist.lifespan}</p>
-                </div>
-                <button
-                  onClick={closeModal}
-                  className="text-gray-400 hover:text-white text-2xl font-bold transition-colors duration-200"
-                >
-                  ×
-                </button>
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-semibold text-purple-300 mb-3">Contribución Principal</h3>
-                  <p className="text-gray-200 leading-relaxed">{selectedAnthropologist.contribution}</p>
-                </div>
-
-                {selectedAnthropologist.method && (
-                  <div>
-                    <h3 className="text-xl font-semibold text-purple-300 mb-3">Método Clave</h3>
-                    <p className="text-gray-200 bg-white/5 p-4 rounded-xl border-l-4 border-purple-400">
-                      <strong>{selectedAnthropologist.method}</strong>
-                    </p>
-                  </div>
-                )}
-
-                {selectedAnthropologist.concepts && (
-                  <div>
-                    <h3 className="text-xl font-semibold text-purple-300 mb-3">Conceptos Importantes</h3>
-                    <div className="flex flex-wrap gap-3">
-                      {selectedAnthropologist.concepts.map((concept, index) => (
-                        <span 
-                          key={index} 
-                          className="px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-100 rounded-lg border border-purple-400/30"
-                        >
-                          {concept}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {selectedAnthropologist.keyWorks && (
-                  <div>
-                    <h3 className="text-xl font-semibold text-purple-300 mb-3">Obras Clave</h3>
-                    <ul className="space-y-2">
-                      {selectedAnthropologist.keyWorks.map((work, index) => (
-                        <li key={index} className="text-gray-200 flex items-center gap-3">
-                          <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                          {work}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {selectedAnthropologist.example && (
-                  <div>
-                    <h3 className="text-xl font-semibold text-purple-300 mb-3">Ejemplo de Estudio</h3>
-                    <p className="text-gray-200 bg-white/5 p-4 rounded-xl border-l-4 border-blue-400">
-                      {selectedAnthropologist.example}
-                    </p>
-                  </div>
-                )}
-
-                {selectedAnthropologist.insight && (
-                  <div>
-                    <h3 className="text-xl font-semibold text-purple-300 mb-3">Aporte Único</h3>
-                    <p className="text-gray-200 italic">"{selectedAnthropologist.insight}"</p>
-                  </div>
-                )}
-
-                {selectedAnthropologist.quote && (
-                  <div className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 p-6 rounded-xl border border-purple-400/50">
-                    <p className="text-xl text-center text-purple-100 italic leading-relaxed">
-                      "{selectedAnthropologist.quote}"
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              <div className="mt-8 pt-6 border-t border-white/10">
-                <p className="text-sm text-purple-200 text-center">
-                  Clic fuera del modal o en la X para cerrar
-                </p>
-              </div>
-            </div>
+    // Open Modal
+    function openModal(anthropologist) {
+      const modal = document.getElementById('modal');
+      const content = document.getElementById('modal-content');
+      
+      let modalHTML = `
+        <div class="flex justify-between items-start mb-6">
+          <div>
+            <h2 class="text-3xl font-bold text-white mb-2">${anthropologist.name}</h2>
+            <p class="text-purple-200">${anthropologist.lifespan}</p>
           </div>
         </div>
-      )}
+      `;
 
-      {/* Footer */}
-      <footer className="bg-black/20 backdrop-blur-sm border-t border-white/10 mt-20">
-        <div className="max-w-7xl mx-auto px-6 py-8 text-center">
-          <p className="text-purple-200">
-            Una exploración visual de los grandes pensadores de la antropología simbólica
-          </p>
-          <p className="text-purple-300/70 text-sm mt-2">
-            Clifford Geertz · Victor Turner · Mary Douglas · Pierre Bourdieu · Sherry Ortner · David Schneider · Marshall Sahlins · Alfred Gell · Nancy Munn · Tom Boellstorff
+      if (anthropologist.contribution) {
+        modalHTML += `
+          <div>
+            <h3 class="text-xl font-semibold text-purple-300 mb-3">Contribución Principal</h3>
+            <p class="text-gray-200 leading-relaxed">${anthropologist.contribution}</p>
+          </div>
+        `;
+      }
+
+      if (anthropologist.method) {
+        modalHTML += `
+          <div>
+            <h3 class="text-xl font-semibold text-purple-300 mb-3">Método Clave</h3>
+            <p class="text-gray-200 bg-white/5 p-4 rounded-xl border-l-4 border-purple-400">
+              <strong>${anthropologist.method}</strong>
+            </p>
+          </div>
+        `;
+      }
+
+      if (anthropologist.concepts) {
+        const conceptsList = anthropologist.concepts.map(c => 
+          `<span class="px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-100 rounded-lg border border-purple-400/30">${c}</span>`
+        ).join('');
+        modalHTML += `
+          <div>
+            <h3 class="text-xl font-semibold text-purple-300 mb-3">Conceptos Importantes</h3>
+            <div class="flex flex-wrap gap-3">${conceptsList}</div>
+          </div>
+        `;
+      }
+
+      if (anthropologist.keyWorks) {
+        const worksList = anthropologist.keyWorks.map(w => 
+          `<li class="text-gray-200 flex items-center gap-3"><div class="w-2 h-2 bg-purple-400 rounded-full"></div>${w}</li>`
+        ).join('');
+        modalHTML += `
+          <div>
+            <h3 class="text-xl font-semibold text-purple-300 mb-3">Obras Clave</h3>
+            <ul class="space-y-2">${worksList}</ul>
+          </div>
+        `;
+      }
+
+      if (anthropologist.example) {
+        modalHTML += `
+          <div>
+            <h3 class="text-xl font-semibold text-purple-300 mb-3">Ejemplo de Estudio</h3>
+            <p class="text-gray-200 bg-white/5 p-4 rounded-xl border-l-4 border-blue-400">
+              ${anthropologist.example}
+            </p>
+          </div>
+        `;
+      }
+
+      if (anthropologist.insight) {
+        modalHTML += `
+          <div>
+            <h3 class="text-xl font-semibold text-purple-300 mb-3">Aporte Único</h3>
+            <p class="text-gray-200 italic">"${anthropologist.insight}"</p>
+          </div>
+        `;
+      }
+
+      if (anthropologist.quote) {
+        modalHTML += `
+          <div class="bg-gradient-to-r from-purple-600/20 to-pink-600/20 p-6 rounded-xl border border-purple-400/50 mt-6">
+            <p class="text-xl text-center text-purple-100 italic leading-relaxed">
+              "${anthropologist.quote}"
+            </p>
+          </div>
+        `;
+      }
+
+      modalHTML += `
+        <div class="mt-8 pt-6 border-t border-white/10">
+          <p class="text-sm text-purple-200 text-center">
+            Clic fuera del modal o en la X para cerrar
           </p>
         </div>
-      </footer>
-    </div>
-  );
-};
+      `;
 
-export default App;
+      content.innerHTML = modalHTML;
+      modal.classList.remove('hidden');
+    }
+
+    // Close Modal
+    function closeModal() {
+      document.getElementById('modal').classList.add('hidden');
+    }
+
+    // Click outside to close
+    document.getElementById('modal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    // Initialize
+    window.onload = renderAnthropologists;
+  </script>
+</body>
+</html>
+
